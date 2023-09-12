@@ -11,10 +11,10 @@ import (
 type cliCommands struct {
 	name string
 	description string
-	callback func(s *stade) error
+	callback func(s *Stade, args ...string) error
 }
 
-func startRelp(s *stade) {
+func startRelp(s *Stade) {
 	scanner := bufio.NewScanner(os.Stdin)
 	for {
 		fmt.Print(" > ")
@@ -33,7 +33,7 @@ func startRelp(s *stade) {
 			fmt.Println("invalid command")
 			continue
 		}
-		err := function.callback(s)
+		err := function.callback(s, userTexted...)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -67,6 +67,26 @@ func getCommands()map[string]cliCommands {
 			name: "mapb",
 			description: "get the last 20 location if possible",
 			callback: callbackMapB,
+		},
+		"explore": {
+			name: "explore",
+			description: "get pokemons available in the {location}",
+			callback: callbackExplore,
+		},
+		"catch": {
+			name: "catch",
+			description: "try to catch the pokemon base in the {name}",
+			callback: callbackcatch,
+		},
+		"inspect": {
+			name: "inspect",
+			description: "check the status of a pokemon if early catch {name}",
+			callback: callbackInspect,
+		},
+		"pokedex": {
+			name: "pokedex",
+			description: "return all available pokemons",
+			callback: callbackPokedex,
 		},
 	}
 }

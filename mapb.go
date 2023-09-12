@@ -2,16 +2,14 @@ package main
 
 import (
 	"fmt"
-
-	"github.com/lucasSSalgado/pokedex/internal/pokeapi"
 )
 
-func callbackMapB(s *stade) error {
+func callbackMapB(s *Stade, args ...string) error {
 	if s.Previous == nil {
 		fmt.Println("not available url")
 		return nil
 	}
-	locations, err := pokeapi.GetLocation(s.Previous)
+	locations, err := s.client.GetLocation(s.Previous)
 	if err != nil {
 		return err
 	}

@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func help(s *stade) error {
+func help(s *Stade, args ...string) error {
 	availableCommands := getCommands()
 	fmt.Println("Welcome to pokedex, here is a list of available commands: ")
 	for _, elem := range availableCommands {

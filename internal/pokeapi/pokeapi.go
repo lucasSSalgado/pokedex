@@ -1,11 +1,22 @@
 package pokeapi
 
-type LocationAreasResp struct {
-	Count    int     `json:"count"`
-	Next     *string `json:"next"`
-	Previous *string `json:"previous"`
-	Results  []struct {
-		Name string `json:"name"`
-		URL  string `json:"url"`
-	} `json:"results"`
+import (
+	"net/http"
+	"time"
+	"github.com/lucasSSalgado/pokedex/internal/pokecache"
+)
+
+type Client struct {
+	client http.Client
+	memory pokecache.Cache
+}
+
+func NewClient() Client {
+	customClient := Client{
+		client: http.Client{
+			Timeout: time.Minute,
+		},
+		memory: pokecache.NewCache(),
+	}
+	return customClient
 }

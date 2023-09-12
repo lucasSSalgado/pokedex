@@ -1,15 +1,20 @@
 package main
 
-type stade struct {
-	Next *string
-	Previous *string
+import (
+	"github.com/lucasSSalgado/pokedex/internal/pokeapi"
+)
+
+type Stade struct {
+	client pokeapi.Client
+	pokemonList map[string]pokeapi.Pokemon
+	Next     *string
+	Previous *string	
 }
 
 func main() {
-	stade := stade{
-		Next: nil,
-		Previous: nil,
+	stade := Stade{
+		client: pokeapi.NewClient(),
+		pokemonList: make(map[string]pokeapi.Pokemon),
 	}
-
 	startRelp(&stade)
 }
